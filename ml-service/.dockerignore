@@ -1,0 +1,42 @@
+# Virtual environment
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# Environment files (secrets)
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Test / Coverage
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Docker (avoid recursive context)
+docker-compose.yml
+Dockerfile
+
+# Docs (not needed in image)
+*.md
+examples/
