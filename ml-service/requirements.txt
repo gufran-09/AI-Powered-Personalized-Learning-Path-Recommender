@@ -1,0 +1,23 @@
+# ============================================================================
+# ML Service Dependencies (AI Recommender)
+# ============================================================================
+
+# Web framework
+fastapi==0.135.0
+uvicorn[standard]==0.41.0
+pydantic==2.12.5
+pydantic-settings==2.13.1
+
+# AI Integration
+google-genai==0.2.1
+
+# HTTP client (for Supabase REST calls)
+httpx==0.28.1
+
+# Security
+python-dotenv==1.2.2
+
+# Testing
+pytest==9.0.2
+pytest-asyncio==1.3.0
+pytest-cov==7.0.0
