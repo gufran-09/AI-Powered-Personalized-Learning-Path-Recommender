@@ -16,11 +16,12 @@ async def generate_learning_path(profile: UserProfile) -> GeneratedPathSchema:
     - Learning Goals: {profile.learning_goals}
     
     The learning path should include a title, a description, and a list of milestones.
+    CRITICAL: Keep the roadmap concise! Provide exactly 3 to 5 high-impact milestones to ensure quick processing.
     Each milestone should have a title, a description, and a clear 'ai_explanation' explaining why it was recommended for this specific user.
     """
     
-    response = client.models.generate_content(
-        model='gemini-2.5-flash',
+    response = await client.aio.models.generate_content(
+        model='gemini-2.5-flash-8b',
         contents=prompt,
         config=types.GenerateContentConfig(
             response_mime_type="application/json",
@@ -54,8 +55,8 @@ async def extract_profile_from_conversation(chat_history: list[ChatMessage]) -> 
     - constraints: list of constraints (e.g., 'no paid courses', 'limited internet')
     """
     
-    response = client.models.generate_content(
-        model='gemini-2.5-flash',
+    response = await client.aio.models.generate_content(
+        model='gemini-2.5-flash-8b',
         contents=prompt,
         config=types.GenerateContentConfig(
             response_mime_type="application/json",
@@ -75,8 +76,8 @@ async def chat_with_assistant(request: ChatRequest) -> str:
     User message: {request.message}
     """
     
-    response = client.models.generate_content(
-        model='gemini-2.5-flash',
+    response = await client.aio.models.generate_content(
+        model='gemini-2.5-flash-8b',
         contents=prompt
     )
     return response.text
