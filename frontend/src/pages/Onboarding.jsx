@@ -28,20 +28,42 @@ export default function Onboarding() {
         scrollToBottom()
     }, [messages])
 
-    const handleSend = (e) => {
+    const handleSend = async (e) => {
         e.preventDefault()
         if (!input.trim() || isGenerating) return
         
-        setMessages(prev => [...prev, { role: 'user', content: input.trim() }])
-        setInput('')
+        const userMsg = input.trim()
+        const currentMessages = [...messages, { role: 'user', content: userMsg }]
         
-        // Add a generic AI acknowledgment after a short delay to keep conversation flowing
-        setTimeout(() => {
-            setMessages(prev => [...prev, { 
-                role: 'assistant', 
-                content: "Got it! Tell me more, or if you feel you've shared enough, click 'Generate My Path' below!" 
-            }])
-        }, 1000)
+        setMessages(currentMessages)
+        setInput('')
+        setIsGenerating(true)
+        
+        try {
+            const contextStr = `This is an onboarding conversation. Ask follow up questions to learn their interests, experience level, career aspirations, available hours per week, preferred learning format (e.g. video/text), and any constraints or deadlines. Do not ask everything at once; make it a natural conversation. Do not generate a learning path yet. Keep responses short and conversational. Conversation history so far: ${JSON.stringify(currentMessages)}`
+            
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/api/chat`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    user_id: user?.id || 'guest', 
+                    message: userMsg,
+                    context: contextStr
+                })
+            })
+            
+            if (res.ok) {
+                const data = await res.json()
+                setMessages(prev => [...prev, { role: 'assistant', content: data.reply }])
+            } else {
+                setMessages(prev => [...prev, { role: 'assistant', content: "Got it! Tell me more, or if you feel you've shared enough, click 'Generate My Path' below!" }])
+            }
+        } catch (err) {
+            console.error(err)
+            setMessages(prev => [...prev, { role: 'assistant', content: "Got it! Tell me more, or if you feel you've shared enough, click 'Generate My Path' below!" }])
+        } finally {
+            setIsGenerating(false)
+        }
     }
 
     const handleGeneratePath = async () => {

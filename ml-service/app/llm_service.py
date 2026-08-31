@@ -44,6 +44,14 @@ async def extract_profile_from_conversation(chat_history: list[ChatMessage]) -> 
     - experience_level: 'beginner', 'intermediate', or 'advanced' (infer from context)
     - career_aspirations: what job or role do they want?
     - learning_goals: what specific outcome are they looking for?
+    - completed_courses: any courses or subjects they mentioned already completing
+    - preferred_learning_format: e.g., 'video', 'text', 'interactive', 'project-based'
+    - preferred_difficulty: e.g., 'easy', 'medium', 'hard', 'challenging'
+    - available_hours_per_week: integer representing hours they can dedicate
+    - target_completion_date: date string if they mentioned a deadline (e.g. 'YYYY-MM-DD')
+    - preferred_study_schedule: e.g., 'weekends', 'evenings', 'mornings'
+    - learning_preferences: list of preferences (e.g., 'visual', 'hands-on')
+    - constraints: list of constraints (e.g., 'no paid courses', 'limited internet')
     """
     
     response = client.models.generate_content(

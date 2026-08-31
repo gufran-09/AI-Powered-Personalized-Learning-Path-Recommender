@@ -32,3 +32,11 @@ export function SkeletonCard({ className = '' }) {
         </div>
     )
 }
+
+export default function Skeleton({ className = '' }) {
+    return (
+        <div
+            className={`bg-surface-200 dark:bg-white/[0.06] rounded-lg animate-pulse ${className}`}
+        />
+    )
+}

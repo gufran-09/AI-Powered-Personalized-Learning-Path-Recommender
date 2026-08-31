@@ -18,6 +18,17 @@ CREATE TABLE IF NOT EXISTS profiles (
   experience_level TEXT,
   career_aspirations TEXT,
   learning_goals TEXT,
+  
+  -- New Adaptive Platform Fields
+  completed_courses TEXT[],
+  preferred_learning_format TEXT,
+  preferred_difficulty TEXT,
+  available_hours_per_week INT,
+  target_completion_date DATE,
+  preferred_study_schedule TEXT,
+  learning_preferences TEXT[],
+  constraints TEXT[],
+
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );

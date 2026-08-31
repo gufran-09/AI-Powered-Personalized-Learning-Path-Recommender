@@ -32,6 +32,31 @@ router.post("/generate", async (req, res) => {
   }
 
   try {
+    // Upsert the extracted profile into the database
+    const { error: profileError } = await supabase
+      .from("profiles")
+      .upsert({
+        id: user_id,
+        interests: profile.interests || [],
+        experience_level: profile.experience_level || 'beginner',
+        career_aspirations: profile.career_aspirations || '',
+        learning_goals: profile.learning_goals || '',
+        completed_courses: profile.completed_courses || [],
+        preferred_learning_format: profile.preferred_learning_format || '',
+        preferred_difficulty: profile.preferred_difficulty || '',
+        available_hours_per_week: profile.available_hours_per_week || 0,
+        target_completion_date: profile.target_completion_date || null,
+        preferred_study_schedule: profile.preferred_study_schedule || '',
+        learning_preferences: profile.learning_preferences || [],
+        constraints: profile.constraints || [],
+        updated_at: new Date()
+      });
+
+    if (profileError) {
+      console.error("Profile Upsert Error:", profileError);
+      // We log but continue, since generating the path is the primary action
+    }
+
     const generatedPath = await mlService.generateLearningPath(user_id, profile);
     if (!generatedPath) {
       return res.status(500).json({ error: "Failed to generate path from ML service" });
