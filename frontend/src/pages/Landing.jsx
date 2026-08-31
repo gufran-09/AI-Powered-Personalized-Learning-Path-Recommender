@@ -135,7 +135,7 @@ export default function Landing() {
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7, delay: 0.3 }}
-                        className="mt-16 relative"
+                        className="mt-12 md:mt-14 relative"
                     >
                         <div className="relative mx-auto max-w-3xl rounded-2xl overflow-hidden border border-surface-200 dark:border-white/[0.06] shadow-2xl">
                             <div className="bg-white dark:bg-surface-800 p-1">
@@ -189,7 +189,7 @@ export default function Landing() {
             </section>
 
             {/* Stats */}
-            <section className="py-20 px-6">
+            <section className="py-14 md:py-16 px-6">
                 <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
                     {stats.map((s, i) => (
                         <motion.div
@@ -206,7 +206,7 @@ export default function Landing() {
             </section>
 
             {/* Features */}
-            <section className="py-20 px-6">
+           <section className="py-16 md:py-20 px-6">
                 <div className="max-w-6xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
