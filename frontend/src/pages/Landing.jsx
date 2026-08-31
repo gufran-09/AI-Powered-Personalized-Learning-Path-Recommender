@@ -88,7 +88,7 @@ export default function Landing() {
             <Navbar />
 
             {/* Hero */}
-            <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+            <section className="relative min-h-[auto] flex items-center justify-center overflow-hidden pt-28 pb-16 md:pt-32 md:pb-20">
                 {/* Floating Shapes */}
                 <FloatingShape className="w-96 h-96 bg-primary -top-20 -left-20 animate-float" delay={0} />
                 <FloatingShape className="w-80 h-80 bg-accent top-1/3 -right-10 animate-float-delayed" delay={0.3} />
